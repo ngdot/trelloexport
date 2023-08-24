@@ -2,9 +2,9 @@
     "templates": [
       {
           "name": "sasllo",
-          "url": "https://sassign.de/files/TrelloExport/sasllo.twig",
+          "url": "https://raw.githubusercontent.com/ngdot/trelloexport/main/sasllo.twig",
           "description": "SASllo",
-          "css": "https://sassign.de/files/TrelloExport/sasllo.css"
+          "css": "https://raw.githubusercontent.com/ngdot/trelloexport/main/sasllo.css"
       }
     ]
 }
