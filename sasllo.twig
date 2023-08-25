@@ -102,6 +102,39 @@
         </div>  
     {% endfor %}
 </div>
+<script>
+    // Liste der Strings, die entfernt werden sollen
+    const stringsToRemove = [
+        " (Mitteleurop�ische Sommerzeit)",
+        "�",
+        ' "smartCard-inline"'
+    ];
+
+    // Alle Tags im gesamten Dokument auswählen
+    const allTags = document.getElementsByTagName('*');
+
+    // Schleife durch alle gefundenen Tags
+    for (let i = 0; i < allTags.length; i++) {
+        const tag = allTags[i];
+
+        // Schleife durch die Kindknoten des Tags
+        for (let j = 0; j < tag.childNodes.length; j++) {
+            const node = tag.childNodes[j];
+
+            // Nur Textknoten bearbeiten
+            if (node.nodeType === Node.TEXT_NODE) {
+                let originalText = node.textContent;
+
+                // Schleife durch die Liste der Strings zum Entfernen
+                for (const stringToRemove of stringsToRemove) {
+                    originalText = originalText.replace(stringToRemove, '');
+                }
+
+                node.textContent = originalText;
+            }
+        }
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
 const swiper = new Swiper('.swiper', {
