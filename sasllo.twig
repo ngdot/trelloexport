@@ -13,55 +13,55 @@
         {% set boardName = '' %}
         {% set prevList = '' %}
         {% for card in data.cards %}
-        {% set theLink = '' %}
-        {% if card.boardName != boardName %}
-            <h2>{{ card.boardName }}</h2>
-        {% endif %}
-        {% set boardName = card.boardName %}
-        {% set organizationName = card.organizationName %}
-        {% set curList = card.listName %}
-        {% if prevList != curList %}
-            <h3><i class="far fa-newspaper"></i> {{ curList }}</h3>
-        {% endif %}
-        {% set prevList = card.listName %}
-            {# find attachment which is an URL and set to variable 'theLink' #}
-        {% if card.jsonAttachments|length > 0 %}
-            {% for attach in card.jsonAttachments %}
-                {% if not attach.isUpload %}
-                {% if theLink is empty %}
-                {% set theLink = attach.url %}
-                {% endif %}
-                {% endif %}
-            {% endfor %}        
-        {% endif %}
-
-        <div class="card">
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <img src="{{ attach.previews|last.url }}" alt="Placeholder image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-content">
-                        <p class="title is-4">{{ card.title }}</p>
+            {% set theLink = '' %}
+            {% if card.boardName != boardName %}
+                <h2>{{ card.boardName }}</h2>
+            {% endif %}
+            {% set boardName = card.boardName %}
+            {% set organizationName = card.organizationName %}
+            {% set curList = card.listName %}
+            {% if prevList != curList %}
+                <h3><i class="far fa-newspaper"></i> {{ curList }}</h3>
+            {% endif %}
+            {% set prevList = card.listName %}
+                {# find attachment which is an URL and set to variable 'theLink' #}
+            {% if card.jsonAttachments|length > 0 %}
+                {% for attach in card.jsonAttachments %}
+                    {% if not attach.isUpload %}
+                    {% if theLink is empty %}
+                    {% set theLink = attach.url %}
+                    {% endif %}
+                    {% endif %}
+                {% endfor %}        
+            {% endif %}
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="{{ attach.previews|last.url }}" alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4">{{ card.title }}</p>
+                        </div>
+                    </div>
+                    <div class="content">
+                    {{ card.cardDescription }}
+                    <br>
+                    <time datetime="{{ card.due }}">{{ card.due }}</time>
                     </div>
                 </div>
-                <div class="content">
-                {{ card.cardDescription }}
-                <br>
-                <time datetime="{{ card.due }}">{{ card.due }}</time>
-                </div>
-            </div>
-            {% for field in card.customFields %}
-            <footer class="card-footer">
-                <div class="card-footer-item">
-                    <span class="label"><i class="fa fa-cube"></i> {{ field.name }}:</span>
-                    <span class="text">{{ field.value }}</span>
-                </div>
-            </footer>
+                {% for field in card.customFields %}
+                <footer class="card-footer">
+                    <div class="card-footer-item">
+                        <span class="label"><i class="fa fa-cube"></i> {{ field.name }}:</span>
+                        <span class="text">{{ field.value }}</span>
+                    </div>
+                </footer>
+                {% endfor %}
+            </div>  
             {% endfor %}
-        </div>  
 </div>
 </body>
 </html>
