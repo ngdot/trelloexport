@@ -5,7 +5,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-<link type="text/css" rel="stylesheet" href="https://raw.githubusercontent.com/ngdot/trelloexport/main/sasllo.css">
+<link rel="stylesheet" href="https://raw.githubusercontent.com/ngdot/trelloexport/main/sasllo.css">
+<linl rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
 </head>
 <body>
 <div class="container">
@@ -15,13 +16,13 @@
     {% for card in data.cards %}
         {% set theLink = '' %}
         {% if card.boardName != boardName %}
-            <h1>{{ card.boardName }}</h1>
+            <h1 class="title">{{ card.boardName }}</h1>
         {% endif %}
         {% set boardName = card.boardName %}
         {% set organizationName = card.organizationName %}
         {% set curList = card.listName %}
         {% if prevList != curList %}
-            <h2>// {{ curList }}</h2>
+            <h2 class="subtitle">{{ curList }}</h2>
         {% endif %}
         {% set prevList = card.listName %}
         {# find attachment which is an URL and set to variable 'theLink' #}
@@ -34,16 +35,25 @@
                 {% endif %}
             {% endfor %}        
         {% endif %}
-        <div class="card">
+        <div class="card mb-6">
             {% if card.jsonAttachments|length > 0 %}
             <div class="card-image">
-                {% for attach in card.jsonAttachments %}
-                    {% if attach.previews|length > 0 %}
-                    <figure class="image is-4by3">
-                        <img src="{{ attach.previews|last.url }}" alt="Placeholder image">
-                    </figure>
-                    {% endif %}
-                {% endfor %}
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                    {% for attach in card.jsonAttachments %}
+                        {% if attach.previews|length > 0 %}
+                        <div class="swiper-slide">
+                            <figure class="image is-square">
+                                <img width="540" src="{{ attach.previews|last.url }}">
+                            </figure>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
             </div>
             {% endif %}
             <div class="card-content">
@@ -61,7 +71,7 @@
             {% if card.customFields|length > 0 %}
                 {% for field in card.customFields %}
                 <footer class="card-footer">
-                    <div class="card-footer-item">
+                    <div class="card-footer-item is-align-items-flex-start is-justify-content-flex-start">
                         <span class="label"><i class="fa fa-cube"></i> {{ field.name }}:</span>
                         <span class="text">{{ field.value }}</span>
                     </div>
@@ -71,5 +81,18 @@
         </div>  
     {% endfor %}
 </div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+const swiper = new Swiper('.swiper', {
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination',
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+</script>
 </body>
 </html>
