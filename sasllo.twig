@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="de">
+<html language="{{ data.renderSettings.language }}">
 <head>
 <title>TrelloExport SASllo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-<link type="text/css" rel="stylesheet" href="https://raw.githubusercontent.com/ngdot/trelloexport/main/sasllo.css">
+<link type="text/css" rel="stylesheet" href="{{ data.renderSettings.CSS }}">
 </head>
 <body>
 <div class="container">
@@ -15,16 +15,16 @@
         {% for card in data.cards %}
             {% set theLink = '' %}
             {% if card.boardName != boardName %}
-                <h2>{{ card.boardName }}</h2>
+                <h1>{{ card.boardName }}</h1>
             {% endif %}
             {% set boardName = card.boardName %}
             {% set organizationName = card.organizationName %}
             {% set curList = card.listName %}
             {% if prevList != curList %}
-                <h3><i class="far fa-newspaper"></i> {{ curList }}</h3>
+                <h2>// {{ curList }}</h2>
             {% endif %}
             {% set prevList = card.listName %}
-                {# find attachment which is an URL and set to variable 'theLink' #}
+            {# find attachment which is an URL and set to variable 'theLink' #}
             {% if card.jsonAttachments|length > 0 %}
                 {% for attach in card.jsonAttachments %}
                     {% if not attach.isUpload %}
