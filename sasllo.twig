@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
 <style>
     .container {
-        max-width: 540px;
+        max-width: 540px !important;
     }
 
     .content h1 {
@@ -24,7 +24,7 @@
     {% for card in data.cards %}
         {% set theLink = '' %}
         {% if card.boardName != boardName %}
-            <h1 class="title">{{ card.boardName }}</h1>
+            <h1 class="title mt-6">{{ card.boardName }}</h1>
         {% endif %}
         {% set boardName = card.boardName %}
         {% set organizationName = card.organizationName %}
@@ -72,15 +72,19 @@
                 </div>
                 <div class="content">
                 {{ card.cardDescription }}
-                <br>
-                <time datetime="{{ card.due }}">{{ card.due }}</time>
                 </div>
             </div>
+            <footer class="card-footer">
+                <div class="card-footer-item is-align-items-flex-start is-justify-content-flex-start">
+                    <span class="label mr-3">Datum:</span>
+                    <span class="text"><time datetime="{{ card.due }}">{{ card.due }}</time></span>
+                </div>
+            </footer>
             {% if card.customFields|length > 0 %}
                 {% for field in card.customFields %}
                 <footer class="card-footer">
                     <div class="card-footer-item is-align-items-flex-start is-justify-content-flex-start">
-                        <span class="label mr-3"><i class="fa fa-cube"></i> {{ field.name }}:</span>
+                        <span class="label mr-3">{{ field.name }}:</span>
                         <span class="text">{{ field.value }}</span>
                     </div>
                 </footer>
