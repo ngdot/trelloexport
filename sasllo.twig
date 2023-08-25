@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html language="de">
+<html lang="de">
 <head>
 <title>TrelloExport SASllo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <link type="text/css" rel="stylesheet" href="https://raw.githubusercontent.com/ngdot/trelloexport/main/sasllo.css
 </head>
 <body>
@@ -35,44 +34,34 @@
                 {% endif %}
             {% endfor %}        
         {% endif %}
-         <div class="row">
-            <div class="col">
-                <div class="card">
-                    <h4>{{ card.title }}</h4>
-                    {% if card.jsonAttachments|length > 0 %}
-                    <div class="attachments">
-                        <span class="label"><i class="fa fa-paperclip"></i> Attachments ({{ card.jsonAttachments|length }}):</span>
-                        {% for attach in card.jsonAttachments %}
-                        <div class="attachment">
-                            <span class="label"><i class="fa fa-paperclip"></i> <a target="_blank" href="{{ attach.url }}">{{ attach.name }}</a>{% if attach.isUpload%} {{ attach.bytes|number_format }} kb{% endif %}</span>
-                            {% if attach.previews|length > 0 %}
-                            <p><img class="img-fluid" src="{{ attach.previews|last.url }}" /></p>
-                            {% endif %}
-                        </div>
-                        {% endfor %}
+
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-4by3">
+                    <img src="{{ attach.previews|last.url }}" alt="Placeholder image">
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4">{{ card.title }}</p>
                     </div>
-                    {% endif %}
-                    <div class="description">
-                        <p class="text">{{ card.cardDescription }}</p>
-                        {% if not theLink is empty %}
-                        <a class="btn btn-primary" target="_blank" href="{{ theLink }}">READ MORE</a>
-                        {% endif %}
-                    </div>
-                    {% if card.customFields|length > 0 %}
-                    <div class="customFields">
-                        <span class="label"><i class="fa fa-cubes"></i> CustomFields ({{ card.customFields|length }}):</span>
-                        {% for field in card.customFields %}
-                        <div class="customField">
-                            <span class="label"><i class="fa fa-cube"></i> {{ field.name }}:</span>
-                            <span class="text">{{ field.value }}</span>
-                        </div>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
+                </div>
+                <div class="content">
+                {{ card.cardDescription }}
+                <br>
+                <time datetime="{{ card.due }}">{{ card.due }}</time>
                 </div>
             </div>
-        </div>
-        {% endfor %}      
+            {% for field in card.customFields %}
+            <footer class="card-footer">
+                <div class="card-footer-item">
+                    <span class="label"><i class="fa fa-cube"></i> {{ field.name }}:</span>
+                    <span class="text">{{ field.value }}</span>
+                </div>
+            </footer>
+            {% endfor %}
+        </div>  
 </div>
 </body>
 </html>
