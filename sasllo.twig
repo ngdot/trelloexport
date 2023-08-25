@@ -19,6 +19,10 @@
     .content h1 {
         display: none;
     }
+
+    .label {
+        min-width: 130px;
+    }
 </style>
 </head>
 <body>
@@ -82,7 +86,7 @@
             <footer class="card-footer">
                 <div class="card-footer-item is-align-items-flex-start is-justify-content-flex-start">
                     <span class="label mr-3">Datum:</span>
-                    <span class="text"><time datetime="{{ card.due }}">{{ card.due }}</time></span>
+                    <span class="text"><time datetime="{{ card.due }}">{{ card.due|format_datetime() }}</time></span>
                 </div>
             </footer>
             {% if card.customFields|length > 0 %}
