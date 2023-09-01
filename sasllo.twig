@@ -131,7 +131,7 @@
 
     const aTags = document.querySelectorAll('a');
     function bereinigeURL(url) {
-        return url.replace(/[^a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=%"]/g, '');
+        return url.replace(/[^a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=%]+/g, '');
     }
 
     aTags.forEach(aTag => {
