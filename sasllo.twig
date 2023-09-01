@@ -130,14 +130,19 @@
     }
 
     const aTags = document.querySelectorAll('a');
+    function bereinigeURL(url) {
+        return url.replace(/[^a-zA-Z0-9\-._~:/?#[\]@!$&'()*+,;=%"]/g, '');
+    }
+
     aTags.forEach(aTag => {
         let hrefValue = aTag.getAttribute('href');
 
-        if (hrefValue && hrefValue.includes(' "smartCard-inline"')) {
-            hrefValue = hrefValue.replace(' "smartCard-inline"', '');
+        if (hrefValue) {
+            hrefValue = bereinigeURL(hrefValue);
             aTag.setAttribute('href', hrefValue);
         }
     });
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
