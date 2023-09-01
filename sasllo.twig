@@ -93,8 +93,7 @@
                 {% for field in card.customFields %}
                 <footer class="card-footer">
                     <div class="card-footer-item is-align-items-flex-start is-justify-content-flex-start">
-                        <span class="label mr-3">{{ field.name }}:</span>
-                        <span class="text">{{ field.value }}</span>
+                        <span class="label ml-3 mr-3">{{ field.name }}: {{ field.value }}</span>
                     </div>
                 </footer>
                 {% endfor %}
@@ -104,7 +103,8 @@
 </div>
 <script>
     const stringsToRemove = [
-        " (Mitteleurop�ische Sommerzeit)",
+        "GMT+0200 (Mitteleurop�ische Sommerzeit)",
+        "�",
         "�",
         "�",
         "�"
