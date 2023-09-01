@@ -7,11 +7,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
 <style>
-    @media print {
-        .card {
-            break-inside: avoid;
-        }
-    }
     .container {
         max-width: 620px !important;
     }
@@ -22,6 +17,25 @@
 
     .label {
         min-width: 130px;
+    }
+
+    @media print {
+        .container {
+            max-width: 100% !important;
+        }
+        .card {
+            break-after: page;
+        }
+        .card-image {
+            break-after: page;
+            max-width: 540px;
+        }
+        .card:first-of-type .card-image {
+            break-after: unset;
+        }
+        hr {
+            margin: 0.5rem;
+        }
     }
 </style>
 </head>
@@ -60,8 +74,8 @@
                     {% for attach in card.jsonAttachments %}
                         {% if attach.previews|length > 0 %}
                         <div class="swiper-slide">
-                            <figure class="image is-square">
-                                <img width="540" src="{{ attach.previews|last.url }}">
+                            <figure class="image">
+                                <img src="{{ attach.previews|last.url }}">
                             </figure>
                         </div>
                         {% endif %}
