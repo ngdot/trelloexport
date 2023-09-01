@@ -85,19 +85,9 @@
             </div>
             <footer class="card-footer">
                 <div class="card-footer-item is-align-items-flex-start is-justify-content-flex-start">
-                    <span class="label mr-3">Datum:</span>
-                    <span class="text"><time datetime="{{ card.due }}">{{ card.due }}</time></span>
+                    <span class="label ml-3 mr-3">{{ field.name }}: {{ field.value }}</span>
                 </div>
             </footer>
-            {% if card.customFields|length > 0 %}
-                {% for field in card.customFields %}
-                <footer class="card-footer">
-                    <div class="card-footer-item is-align-items-flex-start is-justify-content-flex-start">
-                        <span class="label ml-3 mr-3">{{ field.name }}: {{ field.value }}</span>
-                    </div>
-                </footer>
-                {% endfor %}
-            {% endif %}
         </div>  
     {% endfor %}
 </div>
