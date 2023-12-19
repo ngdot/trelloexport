@@ -23,7 +23,7 @@
         display: none;
     }
 
-    @media print {
+     @media print {
         .container {
             max-width: 100% !important;
         }
@@ -34,8 +34,9 @@
             break-after: page;
             max-width: 540px;
         }
-        .card-image img {
+        img {
             width: 100%;
+            max-width: 540px;
             object-fit: contain;
         }
         .card:first-of-type .card-image {
